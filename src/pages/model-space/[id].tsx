@@ -23,7 +23,13 @@ import {
   Flex,
   Spacer,
   useColorModeValue,
-  Divider,
+  Card,
+  CardBody,
+  CardHeader,
+  Stack,
+  StackDivider,
+  RadioGroup,
+  Radio,
 } from "@chakra-ui/react";
 import {
   ModelSpaceDetails,
@@ -66,9 +72,7 @@ const ModelSpace = () => {
   }, [id]);
 
   const handleInputChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     const { name, value, type, checked } = e.target;
     const inputValue = type === "checkbox" ? checked : value;
@@ -122,167 +126,166 @@ const ModelSpace = () => {
           {modelSpace?.description}
         </Text>
       </Box>
-      <Grid
-        templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }}
-        gap={8}
-        p={8}
-      >
+      <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }} gap={8} p={8}>
         <GridItem>
-          <VStack spacing={6} align="stretch">
-            {modelSpace?.inputs.map((input) => (
-              <FormControl key={input.name}>
-                <FormLabel fontSize="lg">{input.name}</FormLabel>
-                {input.type === "text" && (
-                  <Input
-                    type="text"
-                    name={input.name}
-                    value={inputs[input.name] as string}
-                    onChange={handleInputChange}
-                    required={input.required}
-                    size="lg"
-                    variant="filled"
-                    bg={bgColor}
-                    borderWidth={1}
-                    borderColor={inputBorderColor}
-                  />
-                )}
-                {input.type === "bool" && (
-                  <Checkbox
-                    name={input.name}
-                    isChecked={inputs[input.name] as boolean}
-                    onChange={handleInputChange}
-                    size="lg"
-                    colorScheme="blue"
-                  >
-                    {(inputs[input.name] as boolean) ? "True" : "False"}
-                  </Checkbox>
-                )}
-                {input.type === "number" && (
-                  <Flex alignItems="center">
-                    <Slider
-                      name={input.name}
-                      defaultValue={50}
-                      min={0}
-                      max={100}
-                      step={1}
-                      value={inputs[input.name] as number}
-                      onChange={(value) =>
-                        handleSliderChange(input.name, value)
-                      }
-                      size="lg"
-                      colorScheme="blue"
-                    >
-                      <SliderTrack>
-                        <SliderFilledTrack />
-                      </SliderTrack>
-                      <SliderThumb />
-                    </Slider>
-                    <Text ml={4} fontSize="lg">
-                      {inputs[input.name] || 50}
-                    </Text>
-                  </Flex>
-                )}
-                {input.type === "select" && (
-                  <Select
-                    name={input.name}
-                    value={inputs[input.name] as string}
-                    onChange={handleInputChange}
-                    size="lg"
-                    variant="filled"
-                    bg={bgColor}
-                    borderWidth={1}
-                    borderColor={inputBorderColor}
-                  >
-                    {input.options?.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </Select>
-                )}
-                {input.type === "textarea" && (
-                  <Textarea
-                    name={input.name}
-                    value={inputs[input.name] as string}
-                    onChange={handleInputChange}
-                    required={input.required}
-                    size="lg"
-                    variant="filled"
-                    bg={bgColor}
-                    borderWidth={1}
-                    borderColor={inputBorderColor}
-                  />
-                )}
-                {input.type === "audio" && (
-                  <Input
-                    type="file"
-                    name={input.name}
-                    accept="audio/*"
-                    onChange={handleFileInputChange}
-                    required={input.required}
-                    size="lg"
-                    variant="unstyled"
-                  />
-                )}
-                {input.type === "image" && (
-                  <Input
-                    type="file"
-                    name={input.name}
-                    accept="image/*"
-                    onChange={handleFileInputChange}
-                    required={input.required}
-                    size="lg"
-                    variant="unstyled"
-                  />
-                )}
-              </FormControl>
-            ))}
-            <Button onClick={handleSubmit} colorScheme="blue" size="lg">
-              Predict
-            </Button>
-          </VStack>
+          <Card borderWidth={1} borderRadius="md" borderColor={borderColor}>
+            <CardHeader>
+              <Heading size="lg">Inputs</Heading>
+            </CardHeader>
+            <CardBody>
+              <Stack spacing={6} divider={<StackDivider />}>
+                {modelSpace?.inputs.map((input) => (
+                  <Box key={input.name}>
+                    <FormControl>
+                      <FormLabel fontSize="lg">{input.name}</FormLabel>
+                      {input.type === "text" && (
+                        <Input
+                          type="text"
+                          name={input.name}
+                          value={inputs[input.name] as string}
+                          onChange={handleInputChange}
+                          required={input.required}
+                          size="lg"
+                          variant="filled"
+                          bg={bgColor}
+                          borderWidth={1}
+                          borderColor={inputBorderColor}
+                        />
+                      )}
+                      {input.type === "bool" && (
+                        <RadioGroup
+                          name={input.name}
+                          value={inputs[input.name] as string}
+                          onChange={handleInputChange}
+                        >
+                          <Stack direction="row">
+                            <Radio value="true">True</Radio>
+                            <Radio value="false">False</Radio>
+                          </Stack>
+                        </RadioGroup>
+                      )}
+                      {input.type === "number" && (
+                        <Flex alignItems="center">
+                          <Slider
+                            name={input.name}
+                            min={0}
+                            max={100}
+                            step={1}
+                            value={inputs[input.name] as number}
+                            onChange={(value) => handleSliderChange(input.name, value)}
+                            size="lg"
+                            colorScheme="blue"
+                          >
+                            <SliderTrack>
+                              <SliderFilledTrack />
+                            </SliderTrack>
+                            <SliderThumb />
+                          </Slider>
+                          <Text ml={4} fontSize="lg">
+                            {inputs[input.name]}
+                          </Text>
+                        </Flex>
+                      )}
+                      {input.type === "select" && (
+                        <Select
+                          name={input.name}
+                          value={inputs[input.name] as string}
+                          onChange={handleInputChange}
+                          size="lg"
+                          variant="filled"
+                          bg={bgColor}
+                          borderWidth={1}
+                          borderColor={inputBorderColor}
+                        >
+                          {input.options?.map((option) => (
+                            <option key={option} value={option}>
+                              {option}
+                            </option>
+                          ))}
+                        </Select>
+                      )}
+                      {input.type === "textarea" && (
+                        <Textarea
+                          name={input.name}
+                          value={inputs[input.name] as string}
+                          onChange={handleInputChange}
+                          required={input.required}
+                          size="lg"
+                          variant="filled"
+                          bg={bgColor}
+                          borderWidth={1}
+                          borderColor={inputBorderColor}
+                        />
+                      )}
+                      {input.type === "audio" && (
+                        <Input
+                          type="file"
+                          name={input.name}
+                          accept="audio/*"
+                          onChange={handleFileInputChange}
+                          required={input.required}
+                          size="lg"
+                          variant="unstyled"
+                        />
+                      )}
+                      {input.type === "image" && (
+                        <Input
+                          type="file"
+                          name={input.name}
+                          accept="image/*"
+                          onChange={handleFileInputChange}
+                          required={input.required}
+                          size="lg"
+                          variant="unstyled"
+                        />
+                      )}
+                    </FormControl>
+                  </Box>
+                ))}
+              </Stack>
+            </CardBody>
+          </Card>
+          <Button onClick={handleSubmit} colorScheme="blue" size="lg" mt={8}>
+            Predict
+          </Button>
         </GridItem>
-
         <GridItem>
           {outputs && (
-            <VStack spacing={6} align="stretch">
-              <Heading as="h2" size="xl" mb={4}>
-                Outputs
-              </Heading>
-              {modelSpace?.outputs.map((output) => (
-                <Box key={output.name} borderWidth={1} borderRadius="md" p={4}>
-                  <Flex alignItems="center" mb={2}>
-                    <Text fontWeight="bold" fontSize="lg">
-                      {output.name}
-                    </Text>
-                    <Spacer />
-                    {(output.type === "text" || output.type === "number") && (
-                      <Text fontSize="lg">{outputs[output.name]}</Text>
-                    )}
-                    {output.type === "bool" && (
-                      <Text fontSize="lg">{outputs[output.name]?'True':'False'}</Text>
-                    )}
-                  </Flex>
-                  {output.type === "audio" && (
-                    <audio controls style={{ width: "100%" }}>
-                      <source
-                        src={outputs[output.name] as string}
-                        type="audio/wav"
-                      />
-                      Your browser does not support the audio element.
-                    </audio>
-                  )}
-                  {output.type === "image" && (
-                    <Image
-                      src={outputs[output.name] as string}
-                      alt={output.name}
-                      objectFit="cover"
-                      borderRadius="md"
-                    />
-                  )}
-                </Box>
-              ))}
-            </VStack>
+            <Card borderWidth={1} borderRadius="md" borderColor={borderColor}>
+              <CardHeader>
+                <Heading size="lg">Outputs</Heading>
+              </CardHeader>
+              <CardBody>
+                <Stack spacing={6} divider={<StackDivider />}>
+                  {modelSpace?.outputs.map((output) => (
+                    <Box key={output.name}>
+                      <Heading size="md" mb={2}>
+                        {output.name}
+                      </Heading>
+                      {(output.type === "text" ||
+                        output.type === "number" ||
+                        output.type === "bool") && (
+                        <Text fontSize="lg">{outputs[output.name] as string}</Text>
+                      )}
+                      {output.type === "audio" && (
+                        <audio controls style={{ width: "100%" }}>
+                          <source src={outputs[output.name] as string} type="audio/wav" />
+                          Your browser does not support the audio element.
+                        </audio>
+                      )}
+                      {output.type === "image" && (
+                        <Image
+                          src={outputs[output.name] as string}
+                          alt={output.name}
+                          objectFit="cover"
+                          borderRadius="md"
+                        />
+                      )}
+                    </Box>
+                  ))}
+                </Stack>
+              </CardBody>
+            </Card>
           )}
         </GridItem>
       </Grid>

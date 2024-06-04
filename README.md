@@ -1,55 +1,70 @@
-# next-chakra-starter
+# Model Space 
 
-Next-Chakra-Starter is a starter template (boilerplate) for building modern web applications with Next.js (TypeScript), Chakra UI, axios, react-query, react-icons, react-hook-form, and zustand. It provides a solid foundation for quickly prototyping and developing production-ready applications with a consistent UI design, robust state management, and efficient data fetching.
+# Model Space Explorer
 
-# Stack
+Model Space Explorer is a web application that allows users to explore and interact with different model spaces. It provides a user-friendly interface for inputting parameters and generating predictions based on the selected model space.
 
-✔ Next.js.
+## Features
 
-✔ Typescript.
+- **Model Space Selection**: Users can choose from a variety of model spaces to explore and experiment with.
+- **Input Parameters**: Each model space has its own set of input parameters that users can adjust to generate different predictions.
+- **Real-time Predictions**: As users modify the input parameters, the application generates predictions in real-time, providing instant feedback.
+- **Responsive Design**: The application is designed to be responsive and works seamlessly across different devices and screen sizes.
 
-✔ Chakra UI.
+![image](https://github.com/Devesh21700Kumar/Model-space/assets/59202075/53a9580b-2c03-4c54-bf55-c9607275a0a1)
 
-✔ Framer Motion.
 
-✔ Zustand.
+## UI/UX Features
 
-✔ react-hook-form.
+### Home Page
 
-✔ react-query.
+- **Model Space Carousel**: The home page features a carousel that showcases different model spaces. Users can swipe through the carousel to explore and select a model space of their interest.
 
-✔ react-icons.
+![image](https://github.com/Devesh21700Kumar/Model-space/assets/59202075/c1b08607-6ae8-4d28-8704-b80bbb31d41d)
 
-# Utils
+- **Model Space Cards**: Each model space is represented by a card that displays its name, description, and an attractive image. Clicking on a card opens a modal with more details about the model space.
 
-✔ src/utils/axios.fetcher.ts - includes helpful utils for Data fetching:
+![image](https://github.com/Devesh21700Kumar/Model-space/assets/59202075/b58dbe66-1e7b-4fab-865c-b416f46e06e5)
 
-- axiosGraphQL - for fetching the data from a GraphQL API.
-- axios - for fetching the data from a RESTful API.
 
-✔ src/utils/cloudinary.helpers.ts - includes helpful utils for Cloudinary:
+- **Modal**: When a user clicks on a model space card, a modal appears with additional information about the selected model space. The modal includes a larger image, a detailed description, and a "View Details" button that navigates to the model space page.
 
-- makeUploadRequest - for uploading file to cloudinary.
-- makeDeleteRequest - for deleting file from cloudinary.
+### Model Space Page
 
-✔ src/utils/next.utils.ts - includes helpful utils:
+- **Input Section**: The model space page is divided into two main sections: the input section and the output section. The input section allows users to enter values for various parameters specific to the selected model space.
+  - **Text Input**: Users can enter text values for relevant parameters.
+  - **Boolean Input**: Boolean parameters are represented by radio buttons, allowing users to select either "True" or "False".
+  - **Number Input**: Number parameters are displayed as sliders, enabling users to adjust the value within a specified range. The current value is displayed next to the slider.
+  - **Select Input**: Select parameters provide a dropdown menu with predefined options for users to choose from.
+  - **Textarea Input**: Textarea parameters allow users to enter multiline text values.
+  - **Audio Input**: Users can upload audio files for audio-related parameters.
+  - **Image Input**: Users can upload image files for image-related parameters.
+- **Output Section**: The output section displays the generated predictions based on the user's input parameters. It is updated in real-time as the user modifies the input values.
+  - **Text Output**: Text-based predictions are displayed as plain text.
+  - **Number Output**: Numerical predictions are displayed as formatted numbers.
+  - **Boolean Output**: Boolean predictions are displayed as either "True" or "False".
+  - **Audio Output**: Audio predictions are displayed as playable audio files.
+  - **Image Output**: Image predictions are displayed as rendered images.
 
-- checkIsServer - for checking whether you are on a server or client.
-- convertToBase64 - for converting a file to base64.
-- reloadSession - for firing the visibilitychange event without changing the tab.
+![image](https://github.com/Devesh21700Kumar/Model-space/assets/59202075/a6ce800f-1a9c-4ea9-a877-08b9c0270775)
 
-next-chakra-starter is intended for developers who want to start building web applications with Next.js, Chakra UI, axios, react-icons, react-hook-form, and zustand. To use the starter template, follow these steps:
+![image](https://github.com/Devesh21700Kumar/Model-space/assets/59202075/e74d9b17-6c29-4626-abd5-2dcee2aa9b44)
 
-1. Clone the repository: git clone https://github.com/muneebhashone/next-chakra-starter.git
 
-2. Navigate to the project directory: cd next-chakra-starter
+## Technologies Used
 
-3. Install dependencies: npm install
+- **Next.js**: The application is built using Next.js, a React framework for server-side rendering and building fast web applications.
+- **React**: React is used for building the user interface components and managing the application state.
+- **TypeScript**: TypeScript is used to add static typing and improve code quality and maintainability.
+- **Chakra UI**: Chakra UI is utilized for building responsive and accessible UI components, providing a consistent and visually appealing design system.
+- **Axios**: Axios is used for making API requests to fetch model space data and generate predictions.
 
-4. Run the development server: npm run dev
+## Getting Started
 
-Once the development server is running, you can start modifying the index (src/pages/index.tsx), and styles to fit your project's requirements. You can also customize the theme and styling system by editing the src/theme/index.ts file.
+To run the Model Space Explorer application locally, follow these steps:
 
-# Contributions
-
-next-chakra-starter is an open-source project that welcomes contributions from developers of all levels and backgrounds. If you find a bug, want to suggest a feature, or want to improve the documentation, please create an issue or pull request in the project's repository.
+1. Clone the repository: `git clone https://github.com/your-username/model-space-explorer.git`
+2. Install the dependencies: `npm install`
+3. Configure the API endpoints in the `.env` file.
+4. Start the development server: `npm run dev`
+5. Open your browser and visit `http://localhost:3000` to access the application.

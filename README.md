@@ -18,7 +18,10 @@ Model Space Explorer is a web application that allows users to explore and inter
 
 ### Home Page
 
-- **Model Space Carousel**: The home page features a carousel that showcases different model spaces. Users can swipe through the carousel to explore and select a model space of their interest.
+- **Model Space Carousel**: The home page features a carousel that showcases different model spaces. Users can swipe through the carousel to explore and select a model space of their interest. 
+
+ ![image](https://github.com/Devesh21700Kumar/Model-space/assets/59202075/8c400aa6-bf21-4830-88cb-14e002cbca19)
+
 
 ![image](https://github.com/Devesh21700Kumar/Model-space/assets/59202075/c1b08607-6ae8-4d28-8704-b80bbb31d41d)
 
